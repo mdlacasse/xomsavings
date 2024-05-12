@@ -1,4 +1,10 @@
-# Mean-variance optimization of a portfolio with a limited choice of assets
+# **Mean-variance optimization of a portfolio with a limited choice of assets**
+Did you ever ask yourself what the ultimate rate of return could be on a limited-choice 401k if one could guess the market a little better? Or even perfectly? A related and more practical question is Can one determine if the past choice of asset allocation is consistent with one's tolerance to risk? Answering these questions could help better manage current and future choices for asset allocation in a retirement portfolio.
+
+Formulating and answering theses questions is what this script is all about. Following common practice, it considers the volatility of the market as a measure of risk and maintains the volatility of the allocated portfolio below a desired value as a constraint, ensuring that the choice of asset allocation is in line with the desired risk tolerance. The frequency at which changes in asset allocation could be performed can be selected from monthly to yearly, all the way down to only once in the 16-year period that represents the range of historical data considered here and obtained from a public source.
+
+Mathematically, the solution to this problem consists in maximizing the portfolio return under a variance inequality constraint and a long-only portfolio, i.e., a portfolio in which one can only invest in the assets, not short them. This problem has no analytical solution, but it can easily be solved numerically with modern algorithms. 
+
 This file uses sequential quadratic programming to solve the Markowitz formulation of asset allocation in a portfolio having the following choice of assets:
 
 - ExxonMobil stock (XOM)
@@ -9,6 +15,8 @@ This file uses sequential quadratic programming to solve the Markowitz formulati
 - Risk free cash represented by 3-month Treasury bills (^IRX)
 
 Ignoring the *balanced* option offered by Voya, these assets correspond to the classes available in the ExxonMobil 401k plan in the US.
+Only growth is considered, inflation is not.
+For tracking the US Aggregate Bond market, we use the AGG ETF which has an inception year of 2003.
 
 ### Mathematical formulation of the problem
 The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. Thee are two strategies commonly used to solve this problem: it can be solved through imposing an inequality constraint on the variance, or by imposing a penalty term in the objective function. The example shown here uses the first approach. The second is described in notebook MPT_4.pynb.
@@ -19,13 +27,16 @@ Following Markowitz modern portfolio theory, we consider the variance of a marke
 ```
 where $T$ is the transpose operator changing a column vector into a row vector. The square root of the variance, $\sigma$ is the standard deviation that quantifies the volatility. Under this approach, the standard deviation is a measure of risk.
 
-We consider a portfolio which also has a risk-free asset available for investment with a rate of return $r_0$. The rate of return on the market part of the portfolio, i.e., excluding the risk-free asset is
+The rate of return on the market part of the portfolio, i.e., excluding the risk-free asset is
 ```math
 w^T \alpha, 
 ```
 where $\alpha$ is a vector containing the average rates of return for each of the $n$ assets in which the portfolio is invested over the period considered. It is just a weighted sum of average rates, where the weights are a fraction of unity.
 
-Let vector $1_n$ be a vector having 1 for all its elements. The objective function that we would like to maximize is the total return of a portfolio that can also invest in a risk-free asset with return $r_0$, 
+Let vector $1_n$ be a vector having 1 for all its elements. 
+We consider a portfolio which also has a risk-free asset available for investment with a rate of return $r_0$, in which we
+can invest the remaining fraction $(1 - w^T 1_n)$ not invested in the market.
+The objective function that we would like to maximize is the total return of a portfolio that can also invest in a risk-free asset with return $r_0$, 
 ```math
 f(w) = w^T \alpha + (1 - w^T 1_n)r_0,
 ```
