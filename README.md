@@ -1,4 +1,4 @@
-# Mean-variance optimization of a portfolio with limited-choice assets
+# Mean-variance optimization of a portfolio with a limited choice of assets
 This file uses sequential quadratic programming to solve the Markowitz formulation of asset allocation in a portfolio having the following choice of assets:
 
 - ExxonMobil stock (XOM)
@@ -8,15 +8,37 @@ This file uses sequential quadratic programming to solve the Markowitz formulati
 - Bloomberg Aggregate Bond market (AGG)
 - Risk free cash represented by 3-month Treasury bills (^IRX)
 
+Ignoring the *balanced* option offered by Voya, these assets correspond to the classes available in the ExxonMobil 401k plan in the US.
+
 ### Mathematical formulation of the problem
-The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. This problem can be solved through imposing an inequality constraint on the variance, or by imposing a penalty on the variance through the objective function. The example here uses the first approach. The second is described in notebook MPT_4.pynb.
+The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. Thee are two strategies commonly used to solve this problem: it can be solved through imposing an inequality constraint on the variance, or by imposing a penalty term in the objective function. The example shown here uses the first approach. The second is described in notebook MPT_4.pynb.
 
-Following Markowitz modern portfolio theory, we consider the variance of a market portfolio consisting of assets allocated with weights stored in a vector $w$, and having a covariance matrix typically represented by $\Sigma$ which is calculated between the time series of these assets. The variance is then expressed as \\[ \sigma^2 = w^T \Sigma w, \\] where $T$ is the transpose operator changing a column vector into a row vector. The square root of the variance, $\sigma$ is the standard deviation that quantifies the volatility. Under this approach, the standard deviation is a measure of risk.
+Following Markowitz modern portfolio theory, we consider the variance of a market portfolio consisting of assets allocated with weights stored in a vector $w$, and having a covariance matrix typically represented by $\Sigma$ which is calculated between the time series of these assets. The variance is then expressed as
+```math
+\sigma^2 = w^T \Sigma w,
+```
+where $T$ is the transpose operator changing a column vector into a row vector. The square root of the variance, $\sigma$ is the standard deviation that quantifies the volatility. Under this approach, the standard deviation is a measure of risk.
 
-We consider a portfolio which also has a risk-free asset available for investment with a rate of return $r_0$. The rate of return on the market part of the portfolio, i.e., excluding the risk-free asset is \\[ w^T \alpha, \\] where $\alpha$ is a vector containing the average rates of return for each of the $n$ assets in which the portfolio is invested over the period considered. It is just a weighted sum of average rates, where the weights are a fraction of unity.
+We consider a portfolio which also has a risk-free asset available for investment with a rate of return $r_0$. The rate of return on the market part of the portfolio, i.e., excluding the risk-free asset is
+```math
+w^T \alpha, 
+```
+where $\alpha$ is a vector containing the average rates of return for each of the $n$ assets in which the portfolio is invested over the period considered. It is just a weighted sum of average rates, where the weights are a fraction of unity.
 
-Let vector $1_n$ be a vector having 1 for all its elements. The objective function that we would like to maximize is the total return of a portfolio that can also invest in a risk-free asset with return $r_0$, \\[f(w) = w^T \alpha + (1 - w^T 1_n)r_0, \\] subject to the variance of the whole portfolio (i.e., considering the risk-free part) \\[ (w^T 1_m)^2\  w^T\Sigma w \le \sigma_o^2,\\] being smaller than a target value $\sigma_o^2$,
-and under the condition that we only invest, requiring that $w \ge 0$ element-wise, (i.e., no short position), and no borrowing on our cash position, \\[ w^T 1_n \le 1. \\] It can be observed that if $w=0$, then the portfolio is totally invested in the risk-free part, the variance is 0, and the return is $r_0$.
+Let vector $1_n$ be a vector having 1 for all its elements. The objective function that we would like to maximize is the total return of a portfolio that can also invest in a risk-free asset with return $r_0$, 
+```math
+f(w) = w^T \alpha + (1 - w^T 1_n)r_0,
+```
+subject to the variance of the whole portfolio (i.e., considering the risk-free part) 
+```math
+(w^T 1_m)^2\  w^T\Sigma w \le \sigma_o^2,
+```
+being smaller than a target value $\sigma_o^2$,
+and under the condition that we only invest, requiring that $w \ge 0$ element-wise, (i.e., no short position), and no borrowing on our cash position, 
+```math
+w^T 1_n \le 1. 
+```
+It can be observed that if $w=0$, then the portfolio is totally invested in the risk-free part, the variance is 0, and the return is $r_0$.
 
 The desired volatility $\sigma_o$ is specified as the standard deviation on the annual return of the total portfolio, the one containing the risk-free asset.
 
