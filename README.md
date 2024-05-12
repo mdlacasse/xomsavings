@@ -19,7 +19,7 @@ Only growth is considered, inflation is not.
 For tracking the US Aggregate Bond market, we use the AGG ETF which has an inception year of 2003.
 
 ### Mathematical formulation of the problem
-The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. Thee are two strategies commonly used to solve this problem: it can be solved through imposing an inequality constraint on the variance, or by imposing a penalty term in the objective function. The example shown here uses the first approach. The second is described in notebook MPT_4.pynb.
+The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. There are two strategies commonly used to solve this problem: it can be solved through imposing an inequality constraint on the variance, or by imposing a penalty term in the objective function. The example shown here uses the first approach. The second is described in notebook MPT-4.pynb.
 
 Following Markowitz modern portfolio theory, we consider the variance of a market portfolio consisting of assets allocated with weights stored in a vector $w$, and having a covariance matrix typically represented by $\Sigma$ which is calculated between the time series of these assets. The variance is then expressed as
 ```math
