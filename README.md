@@ -1,4 +1,4 @@
-# Mean-variance optimization of a portfolio of limited-choice assets
+# Mean-variance optimization of a portfolio with limited-choice assets
 This file uses sequential quadratic programming to solve the Markowitz formulation of asset allocation in a portfolio having the following choice of assets:
 
 - ExxonMobil stock (XOM)
