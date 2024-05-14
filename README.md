@@ -1,9 +1,9 @@
 # **Mean-variance optimization of a portfolio with a limited choice of assets**
 Did you ever ask yourself what the ultimate rate of return could be on a limited-choice 401k if one could guess the market a little better? Or even perfectly? A related and more practical question is Can one determine if the past choice of asset allocation is consistent with one's tolerance to risk? Answering these questions could help better manage current and future choices for asset allocation in a retirement portfolio.
 
-Formulating and answering theses questions is what this script is all about. Following common practice, it considers the volatility of the market as a measure of risk and maintains the volatility of the allocated portfolio below a desired value as a constraint, ensuring that the choice of asset allocation is in line with the desired risk tolerance. The frequency at which changes in asset allocation could be performed can be selected from monthly to yearly, all the way down to only once in the 16-year period that represents the range of historical data considered here and obtained from a public source.
+Formulating and answering theses questions is what these notebooks are all about. Following common practice, we consider the volatility of the market as a measure of risk and maintain the volatility of the allocated portfolio below a desired value as a constraint, ensuring that the choice of asset allocation is in line with the desired risk tolerance. The frequency at which changes in asset allocation could be performed can be selected from monthly to yearly, all the way down to only once in the 16-year period that represents the range of historical data considered here and obtained from a public source.
 
-Mathematically, the solution to this problem consists in maximizing the portfolio return under a variance inequality constraint and a long-only portfolio, i.e., a portfolio in which one can only invest in the assets, not short them. This problem has no analytical solution, but it can easily be solved numerically with modern algorithms. 
+Mathematically, the solution to this problem consists in maximizing the portfolio return under either a variance inequality constraint or a penalty term, and a long-only portfolio, i.e., a portfolio in which one can only invest in the assets, not short them. This problem has no analytical solution, but it can easily be solved numerically with modern algorithms. 
 
 This file uses sequential quadratic programming to solve the Markowitz formulation of asset allocation in a portfolio having the following choice of assets:
 
@@ -19,7 +19,7 @@ Only growth is considered, inflation is not.
 For tracking the US Aggregate Bond market, we use the AGG ETF which has an inception year of 2003.
 
 ### Mathematical formulation of the problem
-The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. Thee are two strategies commonly used to solve this problem: it can be solved through imposing an inequality constraint on the variance, or by imposing a penalty term in the objective function. The example shown here uses the first approach. The second is described in notebook MPT_4.pynb.
+The level of mathematics involved here only requires basic linear algebra, in particular, matrix-vector multiplication, and basic statistics. There are two strategies commonly used to solve this problem: it can be solved through imposing an inequality constraint on the variance, or by imposing a penalty term in the objective function. The example shown here uses the first approach. The second is described in notebook MPT-4.pynb.
 
 Following Markowitz modern portfolio theory, we consider the variance of a market portfolio consisting of assets allocated with weights stored in a vector $w$, and having a covariance matrix typically represented by $\Sigma$ which is calculated between the time series of these assets. The variance is then expressed as
 ```math
@@ -66,4 +66,7 @@ Enjoy!
 &copy;  2024 Martin-D. Lacasse
 
 This notebook comes with no guarantee. Use at your own risk.
+
+## Required software
+These notebooks are jupyter notebooks that require the installation of Anaconda, which is a free implementation of a Python environment. Installation instructions can be found on the Anaconda [website](www.anaconda.com).
 
