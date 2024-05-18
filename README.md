@@ -89,6 +89,16 @@ This shows that holding bonds instead of cash was beneficial when considering th
 
 Other fixed asset combinations can be easily explored by properly adjusting the `fixedWeigths` and `myWeights` variables in the **Other Adjustable Parameters** section below.
 
+As an example, here are the outputs generated when specifying a 12-month period with a volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
+
+![image](https://github.com/mdlacasse/xomsavings/assets/19365223/01a6c9cc-82e5-48e7-98c7-44652e62f229)
+
+![image](https://github.com/mdlacasse/xomsavings/assets/19365223/29c4dd3e-26f5-4403-8fb5-99c5559f047c)
+
+![image](https://github.com/mdlacasse/xomsavings/assets/19365223/3f24fcc2-2470-454d-aa7d-6342212a8513)
+
+
+
 It is hoped that this script will help the investor understand the long-term impact of the choices that were made on asset allocation. But as always, past market performance is no guarantee of future performance. Nevertheless, there are still useful lessons to be learned here.
 
 Enjoy!
