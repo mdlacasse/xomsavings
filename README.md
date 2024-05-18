@@ -88,8 +88,8 @@ This shows that holding bonds instead of cash was beneficial when considering th
 
 
 Other fixed asset combinations can be easily explored by properly adjusting the `fixedWeigths` and `myWeights` variables in the **Other Adjustable Parameters** section of the notebook.
-
-As an example, here are the outputs generated when specifying a 12-month period with a volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
+These cases use fixed weights on the asset allocations by imposing strict bounds. This is in contrast with an optimization approach where the weights are left to be adjusted to
+maximize the total return of the portfolio. As an example, here are the outputs generated when specifying a 12-month period with a constraint volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
 
 ![image](https://github.com/mdlacasse/xomsavings/assets/19365223/01a6c9cc-82e5-48e7-98c7-44652e62f229)
 
