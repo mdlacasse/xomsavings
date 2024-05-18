@@ -87,7 +87,7 @@ This shows that holding bonds instead of cash was beneficial when considering th
 | 60% | -- | 40% | 9.0%|  6.7%|
 
 
-Other fixed asset combinations can be easily explored by properly adjusting the `fixedWeigths` and `myWeights` variables in the **Other Adjustable Parameters** section below.
+Other fixed asset combinations can be easily explored by properly adjusting the `fixedWeigths` and `myWeights` variables in the **Other Adjustable Parameters** section of the notebook.
 
 As an example, here are the outputs generated when specifying a 12-month period with a volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
 
