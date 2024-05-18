@@ -53,7 +53,7 @@ It can be observed that if $w=0$, then the portfolio is totally invested in the 
 
 The desired volatility $\sigma_o$ is specified as the standard deviation on the annual return of the total portfolio, the one containing the risk-free asset.
 
-While the inequality constraint on variance is a 4th-order equation, the problem can still be solved using sequential quadratic programming with the inequality constraints and bounds presented here. For this purpose, we  use the scipy library. We run the optimization using historical daily values divided by periods of one to several months depending on the user selection. The time series for the assets are downloaded from Yahoo finance. For each period, optimal weights are calculated and values of the portfolio's annualized rates of return are computed and stored for displaying in graphs at the end of the calculations. We restrict the weights $w$ to be between 0 and 1. We use the 252 days of trading in the year to convert annual rates to trading-day rates. More details on the computation are given in the comments inserted in the Python code below.
+While the inequality constraint on variance is a 4th-order equation, the problem can still be solved using sequential quadratic programming with the inequality constraints and bounds presented here. For this purpose, we  use the scipy library. We run the optimization using historical daily values divided by periods of one to several months depending on the user selection. The time series for the assets are downloaded from Yahoo finance. For each period, optimal weights are calculated and values of the portfolio's annualized rates of return are computed and stored for displaying in graphs at the end of the calculations. We restrict the weights $w$ to be between 0 and 1. We use the 252 days of trading in the year to convert annual rates to trading-day rates. More details on the computation are given in the comments inserted in the code of the Python notebooks.
 
 Additional bounds can be imposed on the fraction of investment made in the risk-free asset (`maxCash`) and on holding positions for each market asset (`maxAssetFraction`). The data used are the adjusted daily data at closing (adjusted for splits and dividends). Daily data are grouped in time periods represented in multiples of months (`nMonths`). Choosing 12 months gives an optimization that can re-adjust asset allocation once a year, while choosing 192 months only allows for a single set of asset allocation over the 16 year considered. Note that this is not re-balancing as accounts are implicitly assumed to be always in balance with the chosen asset allocation during each period. Choosing a high number such as 96 months (8 years) gives the historical rate of return from a scenario where one chooses a constant allocation ratio over the first 8 years, and another one for the other 8 following years.
 
@@ -88,8 +88,8 @@ This shows that holding bonds instead of cash was beneficial when considering th
 
 
 Other fixed asset combinations can be easily explored by properly adjusting the `fixedWeigths` and `myWeights` variables in the **Other Adjustable Parameters** section of the notebook.
-
-As an example, here are the outputs generated when specifying a 12-month period with a volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
+These cases use fixed weights on the asset allocations by imposing strict bounds. This is in contrast with an optimization approach where the weights are left to be adjusted to
+maximize the total return of the portfolio. As an example, here are the outputs generated when specifying a 12-month period with a constraint volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
 
 ![image](https://github.com/mdlacasse/xomsavings/assets/19365223/01a6c9cc-82e5-48e7-98c7-44652e62f229)
 
