@@ -57,7 +57,37 @@ While the inequality constraint on variance is a 4th-order equation, the problem
 
 Additional bounds can be imposed on the fraction of investment made in the risk-free asset (`maxCash`) and on holding positions for each market asset (`maxAssetFraction`). The data used are the adjusted daily data at closing (adjusted for splits and dividends). Daily data are grouped in time periods represented in multiples of months (`nMonths`). Choosing 12 months gives an optimization that can re-adjust asset allocation once a year, while choosing 192 months only allows for a single set of asset allocation over the 16 year considered. Note that this is not re-balancing as accounts are implicitly assumed to be always in balance with the chosen asset allocation during each period. Choosing a high number such as 96 months (8 years) gives the historical rate of return from a scenario where one chooses a constant allocation ratio over the first 8 years, and another one for the other 8 following years.
 
-The last thing to select is the desired annualized volatility $\sigma_o$ denoted by `desiredVolatility`. When selecting long-term periods, such as 96 months, one can easily realize that the tolerance for volatility needs to be relaxed in order to achieve higher rates of returns. Interestingly, for the last 16 years, the optimal long-term asset allocation is not the 60/40 stock/bonds portfolio commonly recommended by financial advisors, but rather something else (cash and stocks). While bonds are part of the solution in downturns years, when `nMonths` $\le$ 96, no choice of volatility yielded a 60/40 stocks/bonds portfolio for a 16-year long-term allocation solution. For 2 blocks of 8 years, the solution has only 2 assets: extended stocks/bonds for the first block, but stock/cash allocation for the second half. This echoes what many analysts have said regarding the fate of the 60/40 portfolio wisdom with recent market performance.
+The last thing to select is the desired annualized volatility $\sigma_o$ denoted by `desiredVolatility`. When selecting long-term periods, such as 96 months, one can easily realize that the tolerance for volatility needs to be relaxed in order to achieve higher rates of returns. Interestingly, for the last 16 years, the optimal long-term asset allocation is not the 60/40 stock/bonds portfolio commonly recommended by financial advisors, but rather something else (cash and stocks). While bonds are part of the solution in downturns years, when `nMonths` $\le$ 96, no choice of volatility yielded a 60/40 stocks/bonds portfolio for a 16-year long-term allocation solution. For 2 blocks of 8 years, the solution has only 2 assets: extended stocks/bonds for the first block, but stock/cash allocation for the second half. This echoes what many analysts have said regarding the fate of the 60/40 portfolio wisdom with recent market performance. Exploring this in more details, for the whole period of the last 192 months, the average annual returns of a portfolio of S&P500/bonds compared to a portfolio of S&P500/cash look like the following:
+
+| S&P500 | Bonds | Cash | Return| Volatility|
+| ------: |-------:|------:|-------:|-----------:|
+| 80% | 20% | -- | 7.7%| 16.3%|
+| 80% | -- | 20% | 7.5%| 13.0%|
+| 75% | 25% | -- | 7.5%| 15.3%|
+| 75% | -- | 25% | 7.3%| 11.4%|
+| 70% | 30% | -- | 7.2%| 14.3%|
+| 70% | -- | 30% | 7.0%| 10.0%|
+| 65% | 35% | -- | 7.0%| 13.3%|
+| 65% | -- | 35% | 6.7%|  8.6%|
+| 60% | 40% | -- | 6.7%| 12.4%|
+| 60% | -- | 40% | 6.4%|  7.3%|
+
+This shows that holding bonds instead of cash was beneficial when considering the last 16 years, but this observation is reversed when only considering the last 8 years:
+| S&P500 | Bonds | Cash | Return| Volatility|
+| ------:|-------:|------:|-------:|-------:|
+| 80% | 20% | -- | 10.7%| 15.0%|
+| 80% | -- | 20% | 10.8%| 11.9%|
+| 75% | 25% | -- | 10.2%| 14.1%|
+| 75% | -- | 25% | 10.4%| 10.4%|
+| 70% | 30% | -- | 9.7%| 13.3%|
+| 70% | -- | 30% | 9.9%|  9.1%|
+| 65% | 35% | -- | 9.2%| 12.4%|
+| 65% | -- | 35% | 9.5%|  7.4%|
+| 60% | 40% | -- | 8.7%| 11.6%|
+| 60% | -- | 40% | 9.0%|  6.7%|
+
+
+Other fixed asset combinations can be easily explored by properly adjusting the `fixedWeigths` and `myWeights` variables in the **Other Adjustable Parameters** section below.
 
 It is hoped that this script will help the investor understand the long-term impact of the choices that were made on asset allocation. But as always, past market performance is no guarantee of future performance. Nevertheless, there are still useful lessons to be learned here.
 
