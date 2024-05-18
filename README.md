@@ -59,6 +59,16 @@ Additional bounds can be imposed on the fraction of investment made in the risk-
 
 The last thing to select is the desired annualized volatility $\sigma_o$ denoted by `desiredVolatility`. When selecting long-term periods, such as 96 months, one can easily realize that the tolerance for volatility needs to be relaxed in order to achieve higher rates of returns. Interestingly, for the last 16 years, the optimal long-term asset allocation is not the 60/40 stock/bonds portfolio commonly recommended by financial advisors, but rather something else (cash and stocks). While bonds are part of the solution in downturns years, when `nMonths` $\le$ 96, no choice of volatility yielded a 60/40 stocks/bonds portfolio for a 16-year long-term allocation solution. For 2 blocks of 8 years, the solution has only 2 assets: extended stocks/bonds for the first block, but stock/cash allocation for the second half. This echoes what many analysts have said regarding the fate of the 60/40 portfolio wisdom with recent market performance.
 
+As an example, here are the outputs generated when specifying a 12-month period with a volatility of 5%, `maxCash = 0.80` and `maxAssetFraction = 0.85`.
+
+![image](https://github.com/mdlacasse/xomsavings/assets/19365223/01a6c9cc-82e5-48e7-98c7-44652e62f229)
+
+![image](https://github.com/mdlacasse/xomsavings/assets/19365223/29c4dd3e-26f5-4403-8fb5-99c5559f047c)
+
+![image](https://github.com/mdlacasse/xomsavings/assets/19365223/3f24fcc2-2470-454d-aa7d-6342212a8513)
+
+
+
 It is hoped that this script will help the investor understand the long-term impact of the choices that were made on asset allocation. But as always, past market performance is no guarantee of future performance. Nevertheless, there are still useful lessons to be learned here.
 
 Enjoy!
